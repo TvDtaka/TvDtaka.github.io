@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)file:///C:/Users/Mizo%20Tadataka/Downloads/index.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="溝忠剛 (Tadataka Mizo) — 家庭用サービスロボットと脳型AI。RoboCup@Home DSPL 世界3位 (Hibikino-Musashi@Home)。現・レバレジーズ AI/MLエンジニア。">
+<meta property="og:title" content="Tadataka Mizo">
+<meta property="og:description" content="溝忠剛 (Tadataka Mizo) — domestic service robots, brain-inspired AI, RoboCup@Home. AI/ML engineer at Leverages.">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#ECEEEB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101415" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 32 32&#39;%3E%3Crect width=&#39;32&#39; height=&#39;32&#39; rx=&#39;4&#39; fill=&#39;%23146B65&#39;/%3E%3Ctext x=&#39;16&#39; y=&#39;23&#39; font-family=&#39;monospace&#39; font-size=&#39;19&#39; font-weight=&#39;700&#39; fill=&#39;%23ECEEEB&#39; text-anchor=&#39;middle&#39;%3EM%3C/text%3E%3C/svg%3E">
+<title>Tadataka Mizo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link rel="stylesheet" href="./Tadataka Mizo_files/css2">
+
+<style>
+  /* ── tokens: light (default, unstamped + explicit) ───────────────── */
+  :root {
+    --ground:      #ECEEEB;
+    --surface:     #F7F8F6;
+    --ink:         #14181A;
+    --ink-soft:    #4A555A;
+    --ink-faint:   #7C888D;
+    --rule:        #CFD5D1;
+    --rule-soft:   #DFE3E0;
+    --accent:      #146B65;
+    --accent-deep: #0C4A46;
+    --accent-wash: #DDE9E7;
+    --todo:        #A9531E;
+    --todo-wash:   #F3E4D8;
+
+    --f-display: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --f-body:    "IBM Plex Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --f-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --measure: 66ch;
+    --pad: clamp(1.25rem, 5vw, 3.5rem);
+  }
+
+  /* ── tokens: dark (system default) ───────────────────────────────── */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #101415;
+      --surface:     #171C1E;
+      --ink:         #E6EAE8;
+      --ink-soft:    #A2AFB2;
+      --ink-faint:   #6E7B7E;
+      --rule:        #2A3335;
+      --rule-soft:   #202829;
+      --accent:      #4FB8AE;
+      --accent-deep: #7FD3CA;
+      --accent-wash: #16302E;
+      --todo:        #E09A62;
+      --todo-wash:   #33241A;
+    }
+  }
+
+  /* ── tokens: dark (explicit stamp) ───────────────────────────────── */
+  :root[data-theme="dark"] {
+    --ground:      #101415;
+    --surface:     #171C1E;
+    --ink:         #E6EAE8;
+    --ink-soft:    #A2AFB2;
+    --ink-faint:   #6E7B7E;
+    --rule:        #2A3335;
+    --rule-soft:   #202829;
+    --accent:      #4FB8AE;
+    --accent-deep: #7FD3CA;
+    --accent-wash: #16302E;
+    --todo:        #E09A62;
+    --todo-wash:   #33241A;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 var(--pad) 5rem;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-wash);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  a:hover { color: var(--accent-deep); border-bottom-color: var(--accent); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ── language switching ──────────────────────────────────────────── */
+  body[data-lang="ja"] .en { display: none; }
+  body[data-lang="en"] .ja { display: none; }
+
+  /* ── masthead ────────────────────────────────────────────────────── */
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .6rem var(--pad);
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule-soft);
+    font-family: var(--f-mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .bar .mark { color: var(--ink-soft); }
+
+  .toggle { display: flex; gap: 0; }
+  .toggle button {
+    font: inherit;
+    letter-spacing: .1em;
+    padding: .2rem .55rem;
+    background: transparent;
+    color: var(--ink-faint);
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .toggle button:first-child { border-radius: 2px 0 0 2px; }
+  .toggle button:last-child { border-radius: 0 2px 2px 0; border-left: 0; }
+  .toggle button[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ground);
+  }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ── hero ────────────────────────────────────────────────────────── */
+  header.hero { padding: clamp(3rem, 9vw, 5.5rem) 0 2.75rem; }
+
+  .name {
+    font-family: var(--f-display);
+    font-weight: 900;
+    font-size: clamp(2.6rem, 8vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .name .alt {
+    display: block;
+    font-family: var(--f-mono);
+    font-weight: 400;
+    font-size: clamp(.8rem, 2.4vw, .95rem);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .9rem;
+  }
+
+  .tagline {
+    font-size: clamp(1.02rem, 2.6vw, 1.15rem);
+    color: var(--ink-soft);
+    margin: 1.4rem 0 0;
+    max-width: var(--measure);
+    text-wrap: pretty;
+  }
+
+  .readout {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.75rem;
+    font-family: var(--f-mono);
+    font-size: .74rem;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+  }
+  .readout b { color: var(--ink-soft); font-weight: 500; }
+
+  /* ── sections ────────────────────────────────────────────────────── */
+  section { padding: 2.75rem 0; border-top: 1px solid var(--rule-soft); }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+  }
+  .eyebrow::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 3.4vw, 1.55rem);
+    line-height: 1.35;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+
+  p { max-width: var(--measure); margin: 0 0 1rem; text-wrap: pretty; }
+  p:last-child { margin-bottom: 0; }
+
+  .stack { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  /* ── keyword rows ────────────────────────────────────────────────── */
+  .kws { display: flex; flex-direction: column; gap: 0; }
+  .kw {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 0 1.5rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: baseline;
+  }
+  .kw:last-child { border-bottom: 0; }
+  .kw dt { font-weight: 600; font-size: .95rem; }
+  .kw dd { margin: 0; color: var(--ink-soft); font-size: .92rem; }
+  @media (max-width: 34rem) {
+    .kw { grid-template-columns: 1fr; gap: .1rem; }
+  }
+
+  /* ── timeline ────────────────────────────────────────────────────── */
+  .track { display: flex; flex-direction: column; gap: 0; }
+  .stop {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .stop:last-child { border-bottom: 0; }
+  .stop .when {
+    font-family: var(--f-mono);
+    font-size: .76rem;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    padding-top: .3rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .stop .what { font-weight: 600; margin: 0 0 .15rem; }
+  .stop .where { color: var(--ink-soft); font-size: .93rem; margin: 0; }
+  @media (max-width: 34rem) {
+    .stop { grid-template-columns: 1fr; gap: .3rem; }
+    .stop .when { padding-top: 0; }
+  }
+
+  /* ── publication ─────────────────────────────────────────────────── */
+  .pub {
+    background: var(--surface);
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+    padding: 1.15rem 1.35rem;
+  }
+  .pub .title { font-weight: 600; margin: 0 0 .4rem; line-height: 1.5; }
+  .pub .meta {
+    font-family: var(--f-mono);
+    font-size: .74rem;
+    letter-spacing: .04em;
+    color: var(--ink-faint);
+    margin: 0 0 .55rem;
+  }
+  .pub .authors { font-size: .88rem; color: var(--ink-soft); margin: 0 0 .6rem; line-height: 1.65; }
+  .pub .authors mark {
+    background: var(--accent-wash);
+    color: var(--ink);
+    font-weight: 600;
+    padding: 0 .2em;
+    border-radius: 2px;
+  }
+
+  /* ── highlight card ──────────────────────────────────────────────── */
+  .feat {
+    background: var(--surface);
+    border: 1px solid var(--rule-soft);
+    border-radius: 2px;
+    padding: 1.3rem 1.5rem;
+  }
+  .feat .big {
+    font-family: var(--f-display);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4.5vw, 2rem);
+    line-height: 1.2;
+    margin: 0 0 .35rem;
+    color: var(--accent);
+  }
+  .feat .sub { font-weight: 600; margin: 0 0 .6rem; }
+  .feat p { font-size: .93rem; color: var(--ink-soft); }
+
+  /* ── identifiers ─────────────────────────────────────────────────── */
+  .ids { display: flex; flex-direction: column; gap: 0; }
+  .id {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0 1.5rem;
+    padding: .8rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: baseline;
+  }
+  .id:last-child { border-bottom: 0; }
+  .id dt {
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .id dd { margin: 0; font-size: .95rem; word-break: break-word; }
+
+  /* ── to-fill marker ──────────────────────────────────────────────── */
+  .todo {
+    background: var(--todo-wash);
+    color: var(--todo);
+    font-family: var(--f-mono);
+    font-size: .82em;
+    padding: .1em .45em;
+    border-radius: 2px;
+    border: 1px dashed currentColor;
+  }
+
+  .note {
+    margin-top: .9rem;
+    font-size: .82rem;
+    color: var(--ink-faint);
+    font-family: var(--f-mono);
+    line-height: 1.7;
+  }
+
+  footer {
+    padding: 2.25rem 0 0;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem 1.5rem;
+    justify-content: space-between;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body data-lang="ja">
+<div class="bar">
+  <span class="mark">Tadataka Mizo</span>
+  <div class="toggle" role="group" aria-label="Language / 言語">
+    <button type="button" data-set-lang="ja" aria-pressed="true">JA</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <h1 class="name">
+      <span class="alt">Tadataka Mizo</span>
+      <span class="ja">溝　忠剛</span>
+      <span class="en">Tadataka Mizo</span>
+    </h1>
+
+    <p class="tagline ja">
+      ドラえもんやタチコマのような家庭用サービスロボットをつくり、
+      人とロボットが当たり前に暮らす世界線を目指しています。
+      RoboCup@Home 世界大会3位チーム <b>Hibikino-Musashi@Home</b> でのロボット開発を経て、
+      現在はレバレジーズ株式会社の AI/ML エンジニアとして、研究の知見を事業の現場に実装しています。
+    </p>
+    <p class="tagline en">
+      I want to build domestic service robots — a real-world Doraemon — toward a world
+      where humans and robots live together as a matter of course.
+      After developing robots with <b>Hibikino-Musashi@Home</b>, a team that took 3rd place
+      at the RoboCup@Home world championship, I now work as an AI/ML engineer at Leverages Inc.,
+      turning research into things that ship.
+    </p>
+
+    <div class="readout">
+      <span class="ja"><b>所属</b>　レバレジーズ株式会社</span>
+      <span class="en"><b>Work</b>　Leverages Inc.</span>
+      <span class="ja"><b>分野</b>　ロボティクス / 脳型AI / 機械学習</span>
+      <span class="en"><b>Fields</b>　Robotics / Brain-inspired AI / ML</span>
+      <span><b>ORCID</b>　0009-0004-7587-5220</span>
+    </div>
+  </header>
+
+  <section>
+    <p class="eyebrow"><span class="ja">概要</span><span class="en">About</span></p>
+    <h2 class="ja">基礎研究から、実機、そして事業まで</h2>
+    <h2 class="en">From basic research to real robots to real business</h2>
+    <div class="stack">
+      <p class="ja">
+        関心の中心は、知能と意識の仕組みです。大学院では海馬で起こるカオス的遍歴に触発された
+        行動計画モデルを研究し、国際会議で2件発表しました。ニューロモルフィックデバイスや
+        AIチップを扱う研究グループ（NEDOプロジェクト参画）に身を置き、
+        脳型AIの最前線を一次情報で追ってきました。
+      </p>
+      <p class="en">
+        What draws me is the machinery of intelligence and consciousness. In graduate school
+        I studied an action-planning model inspired by chaotic itinerancy in the hippocampus,
+        presenting twice at international conferences, inside a research group working on
+        neuromorphic devices and AI chips under a NEDO national project.
+      </p>
+      <p class="ja">
+        同時に、研究は動くものにしてこそだと考えています。RoboCup@Home では
+        「Take out Garbage」タスク（ゴミの把持・判定・運搬）の開発やナビゲーションのデバッグを担当し、
+        チームの世界大会3位に貢献。ソフトバンク株式会社 テクノロジーユニット Chief Scientist室での
+        インターンでは、ロボットまわりのシステム構築に携わりました。
+      </p>
+      <p class="en">
+        At the same time, research only counts when it runs. At RoboCup@Home I built the
+        "Take out Garbage" task — grasping, classifying and carrying trash — and debugged
+        navigation, contributing to the team's 3rd place worldwide. As an intern in the
+        Chief Scientist Office of SoftBank's Technology Unit, I worked on the systems
+        around robots.
+      </p>
+      <p class="ja">
+        レバレジーズ入社後は、最大規模の事業部で営業として成績上位（2位・3位）を経験。
+        現在は AI/ML エンジニアとして、モデル開発だけでなく、
+        タクトタイム・費用対効果・品質保証・社内展開といった事業の視点まで含めて
+        AI 活用を設計しています。プライベートでは DMO（観光地域づくり法人）の方々の
+        AI 活用相談に乗りつつ、自分だけのロボットをゼロから作ろうと画策中です。
+      </p>
+      <p class="en">
+        After joining Leverages I first proved myself in sales — ranking 2nd and 3rd in the
+        company's largest business division. Today I design AI adoption end to end — not just models, but takt time,
+        cost-effectiveness, quality assurance and internal rollout. On the side I advise
+        DMOs (destination management organizations) on using AI, and I am slowly building
+        a robot of my own from scratch.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><span class="ja">関心領域</span><span class="en">Interests</span></p>
+    <dl class="kws">
+      <div class="kw">
+        <dt class="ja">家庭用サービスロボット</dt>
+        <dt class="en">Domestic service robots</dt>
+        <dd class="ja">人の生活空間で動くロボットのシステム統合</dd>
+        <dd class="en">System integration for robots in human spaces</dd>
+      </div>
+      <div class="kw">
+        <dt class="ja">海馬・脳型AI</dt>
+        <dt class="en">Hippocampus &amp; brain-inspired AI</dt>
+        <dd class="ja">カオス的遍歴、メンタルトラベル、行動計画モデル</dd>
+        <dd class="en">Chaotic itinerancy, mental travel, action planning</dd>
+      </div>
+      <div class="kw">
+        <dt class="ja">ニューロモルフィック</dt>
+        <dt class="en">Neuromorphic computing</dt>
+        <dd class="ja">レザバー計算、AIチップ、脳型ハードウェア</dd>
+        <dd class="en">Reservoir computing, AI chips, brain-like hardware</dd>
+      </div>
+      <div class="kw">
+        <dt>SLAM / ROS 2</dt>
+        <dd class="ja">ナビゲーション、Depth画像による障害物認識と制御</dd>
+        <dd class="en">Navigation, depth-based obstacle recognition and control</dd>
+      </div>
+      <div class="kw">
+        <dt class="ja">MLの事業実装</dt>
+        <dt class="en">ML in production</dt>
+        <dd class="ja">費用対効果・品質保証・社内展開までの設計</dd>
+        <dd class="en">Designing for ROI, quality assurance and rollout</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section>
+    <p class="eyebrow">RoboCup@Home</p>
+    <div class="feat">
+      <p class="big"><span class="ja">世界3位</span><span class="en">3rd in the world</span></p>
+      <p class="sub">RoboCup 2022 Bangkok — Domestic Standard Platform League (DSPL)</p>
+      <p class="ja">
+        九州工業大学のチーム Hibikino-Musashi@Home のメンバーとして、
+        「<a href="https://www.youtube.com/watch?v=FBOaCINF-lU" target="_blank" rel="noopener">Take out Garbage</a>」タスクの開発、
+        ナビゲーションのデバッグ、採点リーダー・臨時審判を担当。
+        チームは Best Open Challenge Award も受賞し、その後 2024年・2025年の世界大会で連覇を達成しています。
+      </p>
+      <p class="en">
+        As a member of Hibikino-Musashi@Home (Kyushu Institute of Technology) I developed the
+        "<a href="https://www.youtube.com/watch?v=FBOaCINF-lU" target="_blank" rel="noopener">Take out Garbage</a>" task,
+        debugged navigation, and served as scoring lead and stand-in referee.
+        The team also won the Best Open Challenge Award — and went on to win the world
+        championship back to back in 2024 and 2025.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><span class="ja">業績</span><span class="en">Publications</span></p>
+    <div class="stack">
+      <article class="pub">
+        <p class="meta">NOLTA2025 &nbsp;·&nbsp; <span class="ja">国際会議</span><span class="en">Int'l conference</span> &nbsp;·&nbsp; 2025</p>
+        <p class="title">Markov model with a coupled map lattice for recalling event sequences</p>
+        <p class="authors"><mark>Tadataka Mizo</mark>, Katsumi Tateno</p>
+        <p class="ja" style="font-size:.88rem; color:var(--ink-soft);">International Symposium on Nonlinear Theory and Its Applications</p>
+        <p class="en" style="font-size:.88rem; color:var(--ink-soft);">International Symposium on Nonlinear Theory and Its Applications</p>
+      </article>
+      <article class="pub">
+        <p class="meta"><span class="ja">国際会議</span><span class="en">Int'l conference</span> &nbsp;·&nbsp; 2024</p>
+        <p class="title">Retrieval of untraveled route in a hippocampus-inspired model with cue and conjunctive place – head direction maps</p>
+        <p class="authors"><mark>Tadataka Mizo</mark>, Katsumi Tateno</p>
+        <p class="ja" style="font-size:.88rem; color:var(--ink-soft);">The 5th International Symposium on Neuromorphic AI Hardware</p>
+        <p class="en" style="font-size:.88rem; color:var(--ink-soft);">The 5th International Symposium on Neuromorphic AI Hardware</p>
+      </article>
+      <article class="pub">
+        <p class="meta">arXiv:2410.06192 &nbsp;·&nbsp; cs.RO &nbsp;·&nbsp; 2024.10</p>
+        <p class="title">Hibikino-Musashi@Home 2024 Team Description Paper</p>
+        <p class="authors">
+          K. Isomoto, A. Mizutani, F. Matsuzaki, H. Sato, I. Matsumoto, K. Yamao, T. Kawabata,
+          T. Shiba, Y. Yano, A. Yokota, D. Kanaoka, H. Yamaguchi, K. Murai, M. Kim, L. Shen,
+          M. Suzuka, M. Anraku, N. Yamaguchi, S. Fujimatsu, S. Tokuno,
+          <mark>T. Mizo</mark>, T. Fujino, Y. Nakadera, Y. Shishido, Y. Nakaoka, Y. Tanaka,
+          T. Morie, H. Tamukoh
+        </p>
+        <p>
+          <a href="https://arxiv.org/abs/2410.06192" target="_blank" rel="noopener">arXiv</a>
+          &nbsp;·&nbsp;
+          <a href="https://arxiv.org/pdf/2410.06192" target="_blank" rel="noopener">PDF</a>
+        </p>
+      </article>
+      <p class="note ja">
+        修士論文：マルコフモデルと結合写像格子を用いて迷路探索を行うメンタルトラベルモデル
+      </p>
+      <p class="note en">
+        Master's thesis: A mental-travel model for maze exploration using a Markov model with a coupled map lattice
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><span class="ja">経歴</span><span class="en">Experience</span></p>
+    <div class="track">
+      <div class="stop">
+        <div class="when"><span class="ja">現職</span><span class="en">Current</span></div>
+        <div>
+          <p class="what ja">AI/ML エンジニア</p>
+          <p class="what en">AI/ML Engineer</p>
+          <p class="where ja">レバレジーズ株式会社 — モデル開発から費用対効果・品質保証・社内展開の設計まで</p>
+          <p class="where en">Leverages Inc. — from model development to ROI, QA and internal rollout</p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="when">2025</div>
+        <div>
+          <p class="what ja">営業</p>
+          <p class="what en">Sales</p>
+          <p class="where ja">レバレジーズ株式会社 — 最大規模の事業部で営業成績上位（2位・3位）。顧客の課題解決の最前線を経験</p>
+          <p class="where en">Leverages Inc. — ranked 2nd &amp; 3rd in the largest business division; front-line customer problem solving</p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="when"><span class="ja">在学中</span><span class="en">Grad school</span></div>
+        <div>
+          <p class="what ja">インターン（ロボット開発）</p>
+          <p class="what en">Robotics Intern</p>
+          <p class="where ja">ソフトバンク株式会社 テクノロジーユニット Chief Scientist室 — ロボットまわりのシステム構築</p>
+          <p class="where en">SoftBank Corp., Technology Unit, Chief Scientist Office — building the systems around robots</p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="when">–2025.03</div>
+        <div>
+          <p class="what ja">修士（工学）— 2025年3月修了</p>
+          <p class="what en">M.Eng. — completed March 2025</p>
+          <p class="where ja">九州工業大学大学院 生命体工学研究科 人間知能システム工学専攻 — 立野研究室（海馬モデル）・田向研究室（脳型ハードウェア）／NEDO「AIチップ・次世代コンピューティングの技術開発」参画</p>
+          <p class="where en">Graduate School of Life Science and Systems Engineering, Kyutech — Tateno Lab (hippocampal models) &amp; Tamukoh Lab (brain-inspired hardware); NEDO next-generation computing project</p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="when">–2022–</div>
+        <div>
+          <p class="what">Hibikino-Musashi@Home / RoboCup@Home</p>
+          <p class="where ja">生活支援ロボット開発チーム — タスク開発・ナビゲーション（SLAM / ROS / ROS 2）。RoboCup 2022 DSPL 世界3位</p>
+          <p class="where en">Domestic service robot team — task development &amp; navigation (SLAM / ROS / ROS 2). 3rd place, RoboCup 2022 DSPL</p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="when">&nbsp;</div>
+        <div>
+          <p class="what ja">学士（情報工学）</p>
+          <p class="what en">B.Eng. in Computer Science</p>
+          <p class="where ja">九州工業大学 情報工学部 知能情報工学科 人工知能コース — NN・自然言語処理の基礎、Twitter解析のチーム開発、UE5での3Dゲーム制作</p>
+          <p class="where en">School of Computer Science and Systems Engineering, Kyutech (AI course) — NN/NLP fundamentals, team-built Twitter analysis, a 3D game in UE5</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><span class="ja">リンク</span><span class="en">Elsewhere</span></p>
+    <dl class="ids">
+      <div class="id">
+        <dt>ORCID</dt>
+        <dd><a href="https://orcid.org/0009-0004-7587-5220" target="_blank" rel="noopener">0009-0004-7587-5220</a></dd>
+      </div>
+      <div class="id">
+        <dt>arXiv</dt>
+        <dd><a href="https://arxiv.org/abs/2410.06192" target="_blank" rel="noopener">arXiv:2410.06192</a></dd>
+      </div>
+      <div class="id">
+        <dt>Team</dt>
+        <dd><a href="https://www.brain.kyutech.ac.jp/~hma/ja/" target="_blank" rel="noopener">Hibikino-Musashi@Home</a></dd>
+      </div>
+      <div class="id">
+        <dt>GitHub</dt>
+        <dd><a href="https://github.com/TvDtaka" target="_blank" rel="noopener">github.com/TvDtaka</a></dd>
+      </div>
+      <div class="id">
+        <dt>Email</dt>
+        <dd><a href="mailto:khnt.tadataka903@gmail.com">khnt.tadataka903@gmail.com</a></dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <span><span class="ja">最終更新</span><span class="en">Updated</span>　2026.08</span>
+    <span>© Tadataka Mizo</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var body = document.body;
+    var buttons = document.querySelectorAll("[data-set-lang]");
+
+    function setLang(lang) {
+      body.setAttribute("data-lang", lang);
+      if (document.documentElement) document.documentElement.lang = lang;
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
+      });
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        setLang(b.getAttribute("data-set-lang"));
+      });
+    });
+
+    var initial = "ja";
+    try {
+      var nav = (navigator.language || "").toLowerCase();
+      if (nav && nav.indexOf("ja") !== 0) initial = "en";
+    } catch (e) { /* keep default */ }
+    setLang(initial);
+  })();
+</script>
+
+
+</body></html>
